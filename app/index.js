@@ -57,23 +57,27 @@ var PatternlabGenerator = module.exports = yeoman.generators.Base.extend({
                 ]
             },
             {
-                type: 'list',
-                message: 'What type of project is this?',
-                name: 'projectType',
-                choices: [
-                    {
-                        name: 'No Platform',
-                        value: 'master'
-                    },
-                    {
-                        name: 'Magento',
-                        value: 'magento'
-                    },
-                    {
-                        name: 'WordPress',
-                        value: 'wordpress'
-                    }
-                ]
+                type: 'confirm',
+                message: 'Wanna use your own Patternlab template repository?',
+                name: 'wantTemplateRepo'
+            },
+            {
+                when: function (response) {
+                    return response.wantTemplateRepo;
+                },
+                type: 'input',
+                message: 'Github user/organization name?',
+                name: 'templateRepoUsername',
+                default: this.config.get('templateRepoUsername')
+            },
+            {
+                when: function (response) {
+                    return response.wantTemplateRepo;
+                },
+                type: 'input',
+                message: 'Repository name?',
+                name: 'templateRepoName',
+                default: this.config.get('templateRepoName')
             }
         ];
 
@@ -94,7 +98,8 @@ var PatternlabGenerator = module.exports = yeoman.generators.Base.extend({
             this.includeModernizr = hasFeature('includeModernizr');
             this.includeRequire = hasFeature('includeRequire');
             this.includePagespeed = hasGruntFeature('includePagespeed');
-            this.projectType = props.projectType;
+            this.templateRepoName = props.templateRepoName;
+            this.templateRepoUsername = props.templateRepoUsername;
 
             this.dependencies = {};
 
@@ -104,6 +109,11 @@ var PatternlabGenerator = module.exports = yeoman.generators.Base.extend({
 
             if ( this.includeModernizr ) {
                 this.dependencies["modernizr"] = "latest";
+            }
+
+            if ( props.wantTemplateRepo ) {
+                this.config.set('templateRepoName', props.templateRepoName);
+                this.config.set('templateRepoUsername', props.templateRepoUsername);
             }
 
             cb();
@@ -118,7 +128,7 @@ var PatternlabGenerator = module.exports = yeoman.generators.Base.extend({
         this.copy('_package.json', 'package.json');
         this.copy('_bower.json', 'bower.json');
         this.copy('_Gruntfile.js', 'Gruntfile.js');
-        this.copy('_.sublime-project', this._.slugify(this.projectName) + '.sublime-project');
+        //this.copy('_.sublime-project', this._.slugify(this.projectName) + '.sublime-project');
 
         this.mkdir('grunt');
         this.copy('grunt/_aliases.yaml', 'grunt/aliases.yaml');
@@ -152,9 +162,12 @@ var PatternlabGenerator = module.exports = yeoman.generators.Base.extend({
     },
 
     cloningPatternLabTemplates: function() {
+        if ( !this.templateRepoUsername || !this.templateRepoName)
+            return;
+
         var done = this.async();
 
-        this.remote('degdigital', 'patternlab-templates', this.projectType, function(err, remote) {
+        this.remote(this.templateRepoUsername, this.templateRepoName, 'master', function(err, remote) {
             remote.directory('.', 'source');
             done();
         });
