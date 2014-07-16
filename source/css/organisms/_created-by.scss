@@ -9,6 +9,7 @@
 		width: 45%;
 		@media screen and (min-width: 30em) {
 			width: auto; margin-right: 4em;
+			&:last-child { margin-right: 0; }
 		}
 	}
 	a {
@@ -20,19 +21,28 @@
 }
 
 .creator-img { 
-	width: 125px;
+	width: 100px;
 	max-width: 100%;
-	-webkit-filter: grayscale(100%);
+	@include filter(grayscale(100%));
 	border-radius: 50%;
+	@include transition(all, .5s);
 }
 
 .name {
-	font-size: 1.5em;
+	font-size: 1.25em;
 	margin: .5em 0 .25em;
 }
 
-.title { 
-	margin: 0;
-	color: $color-white; 
-	@include transition(all, .5s);
+.deg {
+	vertical-align: top;
+	img {
+		margin-top: 25px;
+		width: 140px;
+		border-radius: 0; 
+		opacity: .3; 
+		&:hover {
+			opacity: 1;
+			@include filter(grayscale(0%));
+		}
+	}
 }
