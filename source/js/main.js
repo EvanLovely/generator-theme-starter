@@ -10,7 +10,7 @@
     		e.preventDefault();
     		var scrollTarget = $(this).attr('href');
     		$('body, html').animate({
-    			scrollTop: $(scrollTarget).offset().top
+    			scrollTop: $(scrollTarget).offset().top - 40
     		}, 500, 'linear', function(){
     			window.location.hash = scrollTarget;
     		});

@@ -11,10 +11,5 @@
 @media screen and (min-width: $mq-small) {
 	.what-item { 
 		margin-top: $spacing-vertical-large;
-
-		&:first-child {
-			margin-top: 0;
-			padding-top: $spacing-vertical-large;
-		}
 	}
 }
