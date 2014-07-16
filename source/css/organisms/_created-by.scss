@@ -3,13 +3,41 @@
 	padding: 0;
 	li {
 		font-size: .8em;
-		margin: 1em 5% 1em 0;
+		margin: 1em 0;
 		display: inline-block;
 		text-align: center;
-		width: 45%;
+		width: 50%;
+		&.deg { 
+			position: absolute; 
+			top: -8px; 
+			right: 0;
+			margin: 0;
+			text-align: right;
+			.creator-img { 
+				border-radius: 0; 
+				opacity: .3; 
+				width: 60px; 
+				&:hover {
+					opacity: 1;
+					@include filter(grayscale(0%));
+				}
+			}
+		}
 		@media screen and (min-width: 30em) {
-			width: auto; margin-right: 4em;
+			width: auto; 
+			margin-right: 4em;
 			&:last-child { margin-right: 0; }
+			&.deg {
+				position: relative;
+				top: auto;
+				right: auto;
+				margin-right: 4em;
+				vertical-align: top;
+				.creator-img { 
+					margin-top: 30px;
+					width: 140px;
+				}
+			}
 		}
 	}
 	a {
@@ -31,18 +59,4 @@
 .name {
 	font-size: 1.25em;
 	margin: .5em 0 .25em;
-}
-
-.deg {
-	vertical-align: top;
-	img {
-		margin-top: 25px;
-		width: 140px;
-		border-radius: 0; 
-		opacity: .3; 
-		&:hover {
-			opacity: 1;
-			@include filter(grayscale(0%));
-		}
-	}
 }
