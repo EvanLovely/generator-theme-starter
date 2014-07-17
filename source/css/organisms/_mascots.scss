@@ -117,6 +117,7 @@
 		font-size: 1.125em;
 		margin: 0;
 		position: absolute;
+		-webkit-backface-visibility: hidden;
 	}
 
 	.mascot-patternlab {
@@ -135,7 +136,6 @@
 	.yeoman-label {
 		left: -40px;
 		@include rotate(-37deg);
-		-webkit-backface-visibility: hidden;
 		top: -10px;
 	}
 
