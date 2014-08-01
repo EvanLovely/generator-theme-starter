@@ -18,6 +18,9 @@
 - Add .gitignore and .sublime-project templates
 
 ## Changelog
+- 0.3.4
+  - Yeo+Lab now pulls the "release-0.7.12" branch of Pattern Lab from GitHub, instead of Master. This is a stopgap measure until we can release a version that works with the new Composer-based version of PL.
+
 - 0.3.3
   - Fixed bug with Sublime Text project file.
 

@@ -144,7 +144,7 @@ var PatternlabGenerator = module.exports = yeoman.generators.Base.extend({
     cloningPatternLab: function() {
         var done = this.async();
 
-        this.remote('pattern-lab', 'patternlab-php', 'master', function(err, remote) {
+        this.remote('pattern-lab', 'patternlab-php', 'release-0.7.12', function(err, remote) {
             remote.directory('.', '');
             done();
         });

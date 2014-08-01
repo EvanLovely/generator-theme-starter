@@ -1,6 +1,6 @@
 {
   "name": "generator-patternlab",
-  "version": "0.3.3",
+  "version": "0.3.4",
   "description": "Yeoman Pattern Lab Generator",
   "license": "MIT",
   "main": "app/index.js",
